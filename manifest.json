@@ -1,0 +1,58 @@
+{
+  "manifest_version": 2,
+  "name": "RatScaleZen",
+  "version": "1.1.0",
+  "description": "Create beautiful icon sets for apps and extensions with multiple export sizes. Works on desktop and mobile.",
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon_16x16.png",
+      "32": "icons/icon_32x32.png",
+      "48": "icons/icon_48x48.png",
+      "128": "icons/icon_128x128.png"
+    },
+    "default_title": "RatScaleZen",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/icon_16x16.png",
+    "32": "icons/icon_32x32.png",
+    "48": "icons/icon_48x48.png",
+    "64": "icons/icon_64x64.png",
+    "128": "icons/icon_128x128.png",
+    "192": "icons/icon_192x192.png",
+    "256": "icons/icon_256x256.png",
+    "512": "icons/icon_512x512.png"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "downloads",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "*.png",
+    "*.html",
+    "*.js",
+    "*.css",
+    "*.json"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "author": "ratbyte.dev",
+  "homepage_url": "https://ratbyte.dev",
+  "short_name": "RatScaleZen",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+R"
+      },
+      "description": "Open RatScaleZen"
+    }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "ratscalezen@ratbyte.dev",
+      "strict_min_version": "109.0"
+    }
+  }
+}

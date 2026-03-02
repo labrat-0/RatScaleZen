@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RatScaleZen</title>
+  <link rel="icon" href="icons/icon_32x32.png" type="image/png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+  <style>
+    :root {
+      --accent: #00ff55;
+      --accent-glow: rgba(0, 255, 85, 0.35);
+      --bg: #080808;
+      --bg-header: #0e0e0e;
+      --text: #f0f0f0;
+      --text-muted: #909090;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0e0e0e;
+      border-radius: 0;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 0;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent-glow);
+    }
+
+    ::-webkit-scrollbar-corner {
+      background: transparent;
+    }
+
+    body {
+      width: 300px;
+      height: 120px;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* CRT scanline overlay */
+    body::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.15) 2px,
+        rgba(0, 0, 0, 0.15) 4px
+      );
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .header {
+      background: var(--bg-header);
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 4px var(--accent-glow));
+    }
+
+    .title {
+      margin-left: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent);
+      text-shadow: 0 0 8px var(--accent-glow);
+      letter-spacing: 1px;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    p {
+      margin: 6px 0;
+      font-size: 12px;
+      text-align: center;
+      color: var(--text);
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid var(--accent);
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s linear infinite;
+      margin: 8px 0;
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .status-message {
+      margin-top: 6px;
+      font-size: 10px;
+      color: var(--text-muted);
+      text-align: center;
+      height: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo-container">
+      <img src="icons/logo.png" alt="RatScaleZen Logo" class="logo">
+      <span class="title">RatScaleZen</span>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="spinner"></div>
+    <p>Opening RatScaleZen...</p>
+    <div id="statusMessage" class="status-message"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

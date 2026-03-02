@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+  <defs>
+    <radialGradient id="a" cx="0.5" cy="0.5" r="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ffbd4f"/>
+      <stop offset="0.193" stop-color="#ffbd4f"/>
+      <stop offset="0.28" stop-color="#ffac31"/>
+      <stop offset="0.639" stop-color="#ff9d17"/>
+      <stop offset="1" stop-color="#ff980e"/>
+    </radialGradient>
+    <radialGradient id="b" cx="0.5" cy="0.5" r="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ff980e"/>
+      <stop offset="0.3" stop-color="#ff7139"/>
+      <stop offset="0.6" stop-color="#ff5b62"/>
+      <stop offset="0.9" stop-color="#b833e1"/>
+      <stop offset="1" stop-color="#9059ff"/>
+    </radialGradient>
+  </defs>
+  <path fill="url(#a)" d="M23.827,7.545a.269.269,0,0,0-.53-.012A13.673,13.673,0,0,0,22.113,4.5a11.3,11.3,0,0,0-5.052-3.654A11.992,11.992,0,0,0,12,.173a12.026,12.026,0,0,0-7.4,2.064A11.2,11.2,0,0,0,.293,11.348c.32.259.064.517.1.783A12.423,12.423,0,0,0,2.166,17.2a11.723,11.723,0,0,0,9.7,6.755A11.909,11.909,0,0,0,23.8,13.517,12.3,12.3,0,0,0,23.827,7.545Z"/>
+  <path fill="url(#b)" d="M23.827,7.545a.269.269,0,0,0-.53-.012A13.673,13.673,0,0,0,22.113,4.5s-2.411,6.625-10.231,6.625c-6.429,0-10.231-3.75-10.231-3.75A11.7,11.7,0,0,0,11.883,23.952,11.909,11.909,0,0,0,23.8,13.517,12.3,12.3,0,0,0,23.827,7.545Z"/>
+</svg> 
