@@ -156,7 +156,7 @@ function setupEventListeners() {
   });
 }
 
-// Initialize RatScaleZen when DOM is loaded
+// Initialize RatForge when DOM is loaded
 window.addEventListener('DOMContentLoaded', () => {
   detectBrowser();
   verifyJSZip();

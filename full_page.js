@@ -40,7 +40,7 @@ function registerWindowWithBackground() {
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', () => {
-  console.log("RatScaleZen DOM loaded");
+  console.log("RatForge DOM loaded");
   
   // Perform a comprehensive check of required DOM elements
   const requiredElements = [
@@ -78,7 +78,15 @@ document.addEventListener('DOMContentLoaded', () => {
       errorMessage.style.borderRadius = '8px';
       errorMessage.style.margin = '20px 0';
       errorMessage.style.color = '#ff5555';
-      errorMessage.innerHTML = `<h3>Extension Error</h3><p>Missing required elements: ${missingElements.join(', ')}</p><p>Please try reinstalling the extension.</p>`;
+      var errH3 = document.createElement('h3');
+      errH3.textContent = 'Extension Error';
+      var errP1 = document.createElement('p');
+      errP1.textContent = 'Missing required elements: ' + missingElements.join(', ');
+      var errP2 = document.createElement('p');
+      errP2.textContent = 'Please try reinstalling the extension.';
+      errorMessage.appendChild(errH3);
+      errorMessage.appendChild(errP1);
+      errorMessage.appendChild(errP2);
       contentElement.prepend(errorMessage);
       
       // Show troubleshooting section
@@ -165,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     debugContent.scrollTop = debugContent.scrollHeight;
   };
   
-  debugLog('RatScaleZen initialized');
+  debugLog('RatForge initialized');
   
   // Initialize UI components
   if (iconPreviewContainer) {
@@ -322,15 +330,28 @@ document.addEventListener('DOMContentLoaded', () => {
       fileName.style.color = 'var(--success)';
       fileName.style.transition = 'color 0.5s ease';
       
-      // Add a checkmark or icon before the filename
-      fileName.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" 
-             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
-             stroke-linejoin="round" style="vertical-align: middle; margin-right: 5px;">
-          <path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
-          <polyline points="9 10 12 13 22 3"></polyline>
-        </svg>
-        ${file.name}`;
+      // Add a checkmark icon before the filename
+      fileName.textContent = '';
+      var svgNS = 'http://www.w3.org/2000/svg';
+      var svg = document.createElementNS(svgNS, 'svg');
+      svg.setAttribute('width', '16');
+      svg.setAttribute('height', '16');
+      svg.setAttribute('viewBox', '0 0 24 24');
+      svg.setAttribute('fill', 'none');
+      svg.setAttribute('stroke', 'currentColor');
+      svg.setAttribute('stroke-width', '2');
+      svg.setAttribute('stroke-linecap', 'round');
+      svg.setAttribute('stroke-linejoin', 'round');
+      svg.style.verticalAlign = 'middle';
+      svg.style.marginRight = '5px';
+      var path = document.createElementNS(svgNS, 'path');
+      path.setAttribute('d', 'M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z');
+      var polyline = document.createElementNS(svgNS, 'polyline');
+      polyline.setAttribute('points', '9 10 12 13 22 3');
+      svg.appendChild(path);
+      svg.appendChild(polyline);
+      fileName.appendChild(svg);
+      fileName.appendChild(document.createTextNode(file.name));
       
       // Revert back after a moment
       setTimeout(() => {
@@ -470,7 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
       img.onload = function() {
         const sizes = [16, 32, 48, 128, 512];
         const zip = new JSZip();
-        const folderName = 'ratscale_icons';
+        const folderName = 'ratforge_icons';
         const folder = zip.folder(folderName);
         
         // Create a canvas for resizing
@@ -1042,7 +1063,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Add README for platform
         platformFolder.file("README.txt", `${platform.toUpperCase()} Icons\n` +
-                          `Generated using RatScaleZen by ratbyte.dev\n` +
+                          `Generated using RatForge by ratbyte.dev\n` +
                           `Contains ${platformSizes.length} icons for ${platform} platform\n` +
                           `Sizes: ${platformSizes.join(', ')}`);
         
@@ -1061,7 +1082,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       
       // Add a README file with info about selected platforms
-      const readmeContent = `RatScaleZen Icon Pack\n` +
+      const readmeContent = `RatForge Icon Pack\n` +
                            `Generated: ${new Date().toLocaleString()}\n` +
                            `Original image: ${selectedFile.name}\n` +
                            `Total icons: ${filteredIconResults.length}\n` +
@@ -1264,30 +1285,60 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create "Scale Another Image" button
     const newImageButton = document.createElement('button');
     newImageButton.className = 'action-button';
-    newImageButton.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" 
-           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
-           style="margin-right: 8px; vertical-align: text-top;">
-        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"></path>
-        <line x1="16" y1="5" x2="22" y2="5"></line>
-        <line x1="19" y1="2" x2="19" y2="8"></line>
-        <circle cx="9" cy="9" r="2"></circle>
-        <path d="M21 15l-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
-      </svg>
-      Select Another Image`;
+    const newImgSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    newImgSvg.setAttribute('width', '16');
+    newImgSvg.setAttribute('height', '16');
+    newImgSvg.setAttribute('viewBox', '0 0 24 24');
+    newImgSvg.setAttribute('fill', 'none');
+    newImgSvg.setAttribute('stroke', 'currentColor');
+    newImgSvg.setAttribute('stroke-width', '2');
+    newImgSvg.setAttribute('stroke-linecap', 'round');
+    newImgSvg.setAttribute('stroke-linejoin', 'round');
+    newImgSvg.style.marginRight = '8px';
+    newImgSvg.style.verticalAlign = 'text-top';
+    const newImgPath1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    newImgPath1.setAttribute('d', 'M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7');
+    const newImgLine1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    newImgLine1.setAttribute('x1', '16'); newImgLine1.setAttribute('y1', '5');
+    newImgLine1.setAttribute('x2', '22'); newImgLine1.setAttribute('y2', '5');
+    const newImgLine2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    newImgLine2.setAttribute('x1', '19'); newImgLine2.setAttribute('y1', '2');
+    newImgLine2.setAttribute('x2', '19'); newImgLine2.setAttribute('y2', '8');
+    const newImgCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    newImgCircle.setAttribute('cx', '9'); newImgCircle.setAttribute('cy', '9'); newImgCircle.setAttribute('r', '2');
+    const newImgPath2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    newImgPath2.setAttribute('d', 'M21 15l-3.086-3.086a2 2 0 0 0-2.828 0L6 21');
+    newImgSvg.appendChild(newImgPath1);
+    newImgSvg.appendChild(newImgLine1);
+    newImgSvg.appendChild(newImgLine2);
+    newImgSvg.appendChild(newImgCircle);
+    newImgSvg.appendChild(newImgPath2);
+    newImageButton.appendChild(newImgSvg);
+    newImageButton.appendChild(document.createTextNode(' Select Another Image'));
     newImageButton.addEventListener('click', resetTool);
     
     // Create "Go to Main Menu" button (assuming this means going back to the extension popup)
     const mainMenuButton = document.createElement('button');
     mainMenuButton.className = 'action-button';
-    mainMenuButton.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" 
-           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-           style="margin-right: 8px; vertical-align: text-top;">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-        <polyline points="9 22 9 12 15 12 15 22"></polyline>
-      </svg>
-      Back to Main Menu`;
+    const menuSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    menuSvg.setAttribute('width', '16');
+    menuSvg.setAttribute('height', '16');
+    menuSvg.setAttribute('viewBox', '0 0 24 24');
+    menuSvg.setAttribute('fill', 'none');
+    menuSvg.setAttribute('stroke', 'currentColor');
+    menuSvg.setAttribute('stroke-width', '2');
+    menuSvg.setAttribute('stroke-linecap', 'round');
+    menuSvg.setAttribute('stroke-linejoin', 'round');
+    menuSvg.style.marginRight = '8px';
+    menuSvg.style.verticalAlign = 'text-top';
+    const menuPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    menuPath.setAttribute('d', 'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z');
+    const menuPolyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+    menuPolyline.setAttribute('points', '9 22 9 12 15 12 15 22');
+    menuSvg.appendChild(menuPath);
+    menuSvg.appendChild(menuPolyline);
+    mainMenuButton.appendChild(menuSvg);
+    mainMenuButton.appendChild(document.createTextNode(' Back to Main Menu'));
     // Reload the browser action popup
     mainMenuButton.addEventListener('click', () => {
       // Reset the tool first
@@ -1299,14 +1350,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create "Close Extension" button
     const closeButton = document.createElement('button');
     closeButton.className = 'action-button';
-    closeButton.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" 
-           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-           style="margin-right: 8px; vertical-align: text-top;">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
-      Close Extension`;
+    const closeSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    closeSvg.setAttribute('width', '16');
+    closeSvg.setAttribute('height', '16');
+    closeSvg.setAttribute('viewBox', '0 0 24 24');
+    closeSvg.setAttribute('fill', 'none');
+    closeSvg.setAttribute('stroke', 'currentColor');
+    closeSvg.setAttribute('stroke-width', '2');
+    closeSvg.setAttribute('stroke-linecap', 'round');
+    closeSvg.setAttribute('stroke-linejoin', 'round');
+    closeSvg.style.marginRight = '8px';
+    closeSvg.style.verticalAlign = 'text-top';
+    const closeLine1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    closeLine1.setAttribute('x1', '18'); closeLine1.setAttribute('y1', '6');
+    closeLine1.setAttribute('x2', '6'); closeLine1.setAttribute('y2', '18');
+    const closeLine2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    closeLine2.setAttribute('x1', '6'); closeLine2.setAttribute('y1', '6');
+    closeLine2.setAttribute('x2', '18'); closeLine2.setAttribute('y2', '18');
+    closeSvg.appendChild(closeLine1);
+    closeSvg.appendChild(closeLine2);
+    closeButton.appendChild(closeSvg);
+    closeButton.appendChild(document.createTextNode(' Close Extension'));
     closeButton.addEventListener('click', () => {
       window.close();
     });
@@ -1411,7 +1475,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadingIndicator = document.createElement('div');
     loadingIndicator.style.textAlign = 'center';
     loadingIndicator.style.padding = '20px';
-    loadingIndicator.innerHTML = '<div class="spinner"></div><p>Preparing icon previews...</p>';
+    const spinnerDiv = document.createElement('div');
+    spinnerDiv.className = 'spinner';
+    const spinnerText = document.createElement('p');
+    spinnerText.textContent = 'Preparing icon previews...';
+    loadingIndicator.appendChild(spinnerDiv);
+    loadingIndicator.appendChild(spinnerText);
     previewGrid.appendChild(loadingIndicator);
     
     // Show preview with animation
@@ -1430,7 +1499,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create a header that shows selected platforms
         const selectedPlatformsInfo = document.createElement('div');
         selectedPlatformsInfo.className = 'selected-platforms-info';
-        selectedPlatformsInfo.innerHTML = `<p>Showing ${selectedSizes.length} icons for: <strong>${selectedPlatforms.join(', ')}</strong></p>`;
+        const infoPara = document.createElement('p');
+        infoPara.appendChild(document.createTextNode('Showing ' + selectedSizes.length + ' icons for: '));
+        const strongEl = document.createElement('strong');
+        strongEl.textContent = selectedPlatforms.join(', ');
+        infoPara.appendChild(strongEl);
+        selectedPlatformsInfo.appendChild(infoPara);
         previewGrid.appendChild(selectedPlatformsInfo);
         
         // Create grid with actual generated icons - but only those for selected platforms

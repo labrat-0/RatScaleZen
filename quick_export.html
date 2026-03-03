@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RatForge — Quick Export</title>
+  <link rel="icon" href="icons/icon_32x32.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #00ff55;
+      --primary-dark: #00cc44;
+      --dark: #080808;
+      --mid: #0c0c0c;
+      --surface: #111111;
+      --text: #f0f0f0;
+      --text-muted: #909090;
+      --warning: #ffaa00;
+      --error: #ff3333;
+      --glow: rgba(0, 255, 85, 0.35);
+      --border: #252525;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--dark);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px);
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .card {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      width: 100%;
+      max-width: 520px;
+      padding: 32px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .header img { width: 36px; height: 36px; }
+    .header h1 {
+      font-size: 20px;
+      color: var(--primary);
+      text-shadow: 0 0 10px var(--glow);
+    }
+    .subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+    .sizes-info {
+      font-size: 11px;
+      color: var(--text-muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      margin-bottom: 16px;
+    }
+    .sizes-info span { color: var(--primary); }
+    .drop-area {
+      border: 2px dashed var(--border);
+      padding: 40px 16px;
+      text-align: center;
+      cursor: pointer;
+      background: rgba(0,255,85,0.03);
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .drop-area:hover, .drop-area.dragging {
+      background: rgba(0,255,85,0.08);
+      box-shadow: 0 0 12px var(--glow);
+    }
+    .drop-area .icon { font-size: 32px; color: var(--primary); margin-bottom: 8px; }
+    .drop-area p { font-size: 14px; margin-bottom: 4px; }
+    .drop-area .formats { font-size: 11px; color: var(--text-muted); }
+    .drop-area input {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      opacity: 0; cursor: pointer;
+    }
+    .progress-wrap {
+      margin-top: 20px;
+      display: none;
+    }
+    .progress-wrap.active { display: block; }
+    .progress-bar-track {
+      width: 100%;
+      background: #1a1a1a;
+      height: 6px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    .status {
+      font-size: 12px;
+      margin-top: 8px;
+      text-align: center;
+      min-height: 18px;
+    }
+    .result {
+      margin-top: 16px;
+      display: none;
+      text-align: center;
+    }
+    .result.active { display: block; }
+    .result .count {
+      font-size: 13px;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .open-full {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      font-family: inherit;
+      cursor: pointer;
+      background: none;
+    }
+    .open-full:hover { color: var(--primary); border-color: var(--primary); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <img src="icons/logo.png" alt="RatForge">
+      <h1>Quick Export</h1>
+    </div>
+    <div class="subtitle">Drop an image, get a ZIP with all the sizes devs actually need.</div>
+    <div class="sizes-info">
+      Generates: <span>16, 32, 48, 64, 128, 192, 256, 512</span> px — PNG + favicon.ico
+    </div>
+    <div id="dropArea" class="drop-area">
+      <input type="file" id="fileInput" accept="image/*">
+      <div class="icon">&#11015;&#65039;</div>
+      <p>Drop image here or click to select</p>
+      <div class="formats">PNG, JPG, WebP, GIF, SVG — Max 5MB</div>
+    </div>
+    <div id="progressWrap" class="progress-wrap">
+      <div class="progress-bar-track">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+      <div id="status" class="status"></div>
+    </div>
+    <div id="result" class="result">
+      <div id="resultCount" class="count"></div>
+    </div>
+    <div style="text-align:center;">
+      <button id="openFull" class="open-full">Open full RatForge toolkit</button>
+    </div>
+  </div>
+  <script src="jszip.min.js"></script>
+  <script src="quick_export.js"></script>
+</body>
+</html>

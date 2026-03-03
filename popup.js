@@ -18,8 +18,8 @@ function openFullPageApp() {
   browser.windows.create({
     url: browser.runtime.getURL('minimal_full_page.html'),
     type: 'popup',
-    width: 650,
-    height: 800
+    width: 920,
+    height: 850
   }).then((newWindow) => {
     // If window created successfully, close this popup
     console.log('Created window with ID:', newWindow.id);

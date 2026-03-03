@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "RatScaleZen",
-  "version": "1.1.0",
-  "description": "Create beautiful icon sets for apps and extensions with multiple export sizes. Works on desktop and mobile.",
+  "name": "RatForge",
+  "version": "2.0.0",
+  "description": "All-in-one icon toolkit — resize, mask, preview, and export icons for every platform with favicon, manifest, and format support.",
   "browser_action": {
     "default_icon": {
       "16": "icons/icon_16x16.png",
@@ -10,8 +10,7 @@
       "48": "icons/icon_48x48.png",
       "128": "icons/icon_128x128.png"
     },
-    "default_title": "RatScaleZen",
-    "default_popup": "popup.html"
+    "default_title": "RatForge"
   },
   "icons": {
     "16": "icons/icon_16x16.png",
@@ -28,7 +27,8 @@
   },
   "permissions": [
     "downloads",
-    "storage"
+    "storage",
+    "menus"
   ],
   "web_accessible_resources": [
     "*.png",
@@ -40,19 +40,24 @@
   "content_security_policy": "script-src 'self'; object-src 'self'",
   "author": "ratbyte.dev",
   "homepage_url": "https://ratbyte.dev",
-  "short_name": "RatScaleZen",
+  "short_name": "RatForge",
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
         "default": "Alt+R"
       },
-      "description": "Open RatScaleZen"
+      "description": "Open RatForge"
     }
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "ratscalezen@ratbyte.dev",
-      "strict_min_version": "109.0"
+      "id": "ratforge@ratbyte.dev",
+      "strict_min_version": "109.0",
+      "data_collection_permissions": {
+        "collectsTechnicalData": false,
+        "collectsInteractionData": false,
+        "collectsLocationData": false
+      }
     }
   }
 }
