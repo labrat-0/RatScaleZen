@@ -1,3 +1,5 @@
 /.cursor
 icons/icons/
 icons/temp/
+# GSD planning artifacts
+.planning/
