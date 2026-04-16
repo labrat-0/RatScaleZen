@@ -2,8 +2,6 @@
 
 <div align="center">
 
-![RatScaleZen](icons/logo.png)
-
 </div>
 
 Browser extension that generates platform-specific icon sets from a single image. Drop in a PNG, select your target platforms, and download a ZIP with every size you need. Runs entirely in-browser -- no uploads, no servers, no API keys. Built for Zen Browser and Firefox.
