@@ -1063,7 +1063,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Add README for platform
         platformFolder.file("README.txt", `${platform.toUpperCase()} Icons\n` +
-                          `Generated using RatForge by ratbyte.dev\n` +
+                          `Generated using RatForge by ratlabs.tech\n` +
                           `Contains ${platformSizes.length} icons for ${platform} platform\n` +
                           `Sizes: ${platformSizes.join(', ')}`);
         

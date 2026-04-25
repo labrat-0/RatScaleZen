@@ -190,5 +190,5 @@ MIT. See [LICENSE](LICENSE).
 
 **Mick Donahue (labrat)**
 
-- Website: [ratbyte.dev](https://ratbyte.dev)
+- Website: [ratlabs.tech](https://ratlabs.tech)
 - GitHub: [@labrat-0](https://github.com/labrat-0)

@@ -38,8 +38,8 @@
     "*.json"
   ],
   "content_security_policy": "script-src 'self'; object-src 'self'",
-  "author": "ratbyte.dev",
-  "homepage_url": "https://ratbyte.dev",
+  "author": "ratlabs.tech",
+  "homepage_url": "https://ratlabs.tech",
   "short_name": "RatForge",
   "commands": {
     "_execute_browser_action": {

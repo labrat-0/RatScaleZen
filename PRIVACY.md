@@ -41,7 +41,7 @@ This privacy policy may be updated occasionally. Any changes will be reflected i
 
 If you have any questions regarding this privacy policy, please contact:
 - GitHub: [@labrat-0](https://github.com/labrat-0)
-- Website: [ratbyte.dev](https://ratbyte.dev)
+- Website: [ratlabs.tech](https://ratlabs.tech)
 
 ## Last Updated
 
@@ -49,4 +49,4 @@ This privacy policy was last updated on March 1, 2026.
 
 ---
 
-*RatScaleZen by ratbyte.dev - Developed by Mick Donahue*
+*RatScaleZen by ratlabs.tech - Developed by Mick Donahue*
