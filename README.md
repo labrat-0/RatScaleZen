@@ -1,5 +1,5 @@
 # RatScaleZen
-
+![image](https://github.com/labrat-0/RatForge/blob/main/icons/icon_192x192.png)
 <div align="center">
 
 </div>
