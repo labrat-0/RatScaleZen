@@ -6,6 +6,8 @@
 
 Browser extension that generates platform-specific icon sets from a single image. Drop in a PNG, select your target platforms, and download a ZIP with every size you need. Runs entirely in-browser -- no uploads, no servers, no API keys. Built for Zen Browser and Firefox.
 
+![image](https://github.com/labrat-0/RatForge/blob/main/icons/ratforge-site.png)
+
 ## What does it do?
 
 RatScaleZen takes one image and resizes it into the exact icon dimensions required by each platform -- Android, iOS, Windows, macOS, Chrome, Firefox, and PWA. Output is a ZIP file organized into platform subfolders, each containing only the sizes that platform needs.
